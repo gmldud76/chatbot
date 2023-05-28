@@ -23,6 +23,10 @@ from langchain.prompts import PromptTemplate
 
 # streamlit run app.py
 
+import os
+
+api_key = os.getenv("OPENAI_API_KEY")
+
 def main() :
     load_dotenv()
 
@@ -49,7 +53,7 @@ def main() :
         chunks = text_splitter.split_text(text)
 
         # create embeddings
-        embeddings = OpenAIEmbeddings()
+        embeddings = OpenAIEmbeddings(openai_api_key=api_key)
         knowledge_base = FAISS.from_texts(chunks, embeddings)
 
 
