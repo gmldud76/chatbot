@@ -25,7 +25,7 @@ from langchain.prompts import PromptTemplate
 
 import os
 
-api_key = os.getenv("OPENAI_API_KEY")
+#api_key = os.getenv("OPENAI_API_KEY")
 
 def main() :
     load_dotenv()
@@ -53,7 +53,7 @@ def main() :
         chunks = text_splitter.split_text(text)
 
         # create embeddings
-        embeddings = OpenAIEmbeddings(openai_api_key=api_key)
+        embeddings = OpenAIEmbeddings(openai_api_key=os.getenv("OPENAI_API_KEY"))
         knowledge_base = FAISS.from_texts(chunks, embeddings)
 
 
