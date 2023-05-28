@@ -3,7 +3,7 @@ name: Deploy to Streamlit
 on:
   push:
     branches:
-      - api
+      - main
 
 jobs:
   deploy:
