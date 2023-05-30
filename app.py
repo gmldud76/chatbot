@@ -34,8 +34,9 @@ def main() :
     st.header('Ask your PDF')
 
     # upload file
-    pdf = st.file_uploader('Upload your PDF', type = 'pdf')
-
+    #pdf = st.file_uploader('Upload your PDF', type = 'pdf')
+    pdf = "Yeongcheon.pdf"
+    
     # extract the text
     if pdf is not None :
         pdf_reader = PdfReader(pdf)
