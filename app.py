@@ -31,7 +31,7 @@ def main() :
     load_dotenv()
 
     st.set_page_config(page_title = 'Ask your PDF')
-    st.header('Ask your PDF')
+    st.header('영천시 관광 챗봇 -영광이-')
 
     # upload file
     #pdf = st.file_uploader('Upload your PDF', type = 'pdf')
@@ -59,7 +59,7 @@ def main() :
 
 
         # show your question
-        user_question = st.text_input("Ask a question about your PDF:", key="user_question")
+        user_question = st.text_input("영천시 관광에 대해 물어봐", key="user_question")
         
         if user_question :
             docs = knowledge_base.similarity_search(user_question)
