@@ -25,7 +25,7 @@ from langchain.prompts import PromptTemplate
 
 col1, col2 = st.columns([2,8])
 with col1:
-    st.image('yc_chr.png', width=150)
+    st.image('star_yc.png', width=150)
 with col2:
     st.title('영천시 관광 챗봇')
 st.markdown('')
@@ -64,7 +64,7 @@ def main() :
         # show your question
         col3, col4 = st.columns([1,8])
         with col3:
-            st.image('yc_chr.png', width = 100)
+            st.image('yc_chr.png', width = 150)
         with col4:
             placeholder_text = '예시1: 영천시 관광 추천해줘.'
             query = st.text_area("영천시 관광에 대해 물어보세요.:sunglasses: SEND 버튼 또는 Ctrl+Enter를 누르면 답변이 생성됩니다.", "", placeholder=placeholder_text)
