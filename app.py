@@ -38,7 +38,7 @@ def main() :
 
     # upload file
     # pdf = st.file_uploader('Upload your PDF', type = 'pdf')
-    pdf= "C:/Users/heeyoung/Desktop/4/chatbot/langchain-ask-pdf-main/Yeongcheon.pdf"
+    pdf= "Yeongcheon.pdf"
 
     # extract the text
     if pdf is not None :
@@ -64,7 +64,7 @@ def main() :
         # show your question
         col3, col4 = st.columns([1,8])
         with col3:
-            st.image('C:/Users/heeyoung/Desktop/4/chatbot/langchain-ask-pdf-main/yc_chr.png', width = 90)
+            st.image('yc_chr.png', width = 90)
         with col4:
             placeholder_text = '예시1: 영천시 관광 추천해줘.'
             query = st.text_area("영천시 관광에 대해 물어보세요.:sunglasses: SEND 버튼 또는 Ctrl+Enter를 누르면 답변이 생성됩니다.", "", placeholder=placeholder_text)
