@@ -23,7 +23,7 @@ from langchain.prompts import PromptTemplate
 
 # streamlit run app.py
 
-col1, col2 = st.columns([2,7])
+col1, col2 = st.columns([2,8])
 with col1:
     st.image('yc_chr.png', width=150)
 with col2:
