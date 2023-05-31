@@ -27,11 +27,18 @@ import os
 
 #api_key = os.getenv("OPENAI_API_KEY")
 
+col1, col2 = st.columns([1,8])
+with col1:
+    st.image('yc_chr.png')
+with col2:
+    st.title('영천시 관광 챗봇')
+st.markdown('')
+
 def main() :
     load_dotenv()
 
-    st.set_page_config(page_title = 'Ask your PDF')
-    st.header('영천시 관광 챗봇 -영광이-')
+    #st.set_page_config(page_title = 'Ask your PDF')
+    #st.header('영천시 관광 챗봇 -영광이-')
 
     # upload file
     #pdf = st.file_uploader('Upload your PDF', type = 'pdf')
