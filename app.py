@@ -62,7 +62,7 @@ def main() :
 
 
         # show your question
-        col3, col4 = st.columns([1,8])
+        col3, col4 = st.columns([3,8])
         with col3:
             st.image('yc_chr.png', width = 90)
         with col4:
