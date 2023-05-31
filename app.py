@@ -38,7 +38,7 @@ def main() :
 
     # upload file
     # pdf = st.file_uploader('Upload your PDF', type = 'pdf')
-    pdf= "Yeongcheon.pdf"
+    pdf= "YC_1.pdf"
 
     # extract the text
     if pdf is not None :
