@@ -25,7 +25,7 @@ from langchain.prompts import PromptTemplate
 
 col1, col2 = st.columns([1,8])
 with col1:
-    st.image('C:/Users/heeyoung/Desktop/4/chatbot/langchain-ask-pdf-main/yc_star.png')
+    st.image('yc_star.png')
 with col2:
     st.title('영천시 관광 챗봇')
 st.markdown('')
