@@ -94,7 +94,7 @@ def main() :
             with st.spinner("Thinking...") : 
                 with get_openai_callback() as cb : 
                     if 'code' in query.lower():
-                        response = "We are a chatbot that answers about tourism in Yeongcheon."
+                        response = "We are a chatbot that answers about tourism in Yeongcheon. You must return in Korean. Return a accurate answer based on the document and conversation history."
                     else:
                         response = chain.run(input_documents = docs, question = query)
                     
