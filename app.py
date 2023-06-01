@@ -28,7 +28,7 @@ def main() :
     load_dotenv()
 
     #st.set_page_config(page_title = 'Ask your PDF')
-    st.header('영천시 관광 가이드 챗봇 ')
+    st.header('      영천시 관광 가이드 챗봇 ')
 
     # upload file
     # pdf = st.file_uploader('Upload your PDF', type = 'pdf')
