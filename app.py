@@ -23,18 +23,12 @@ from langchain.prompts import PromptTemplate
 
 # streamlit run app.py
 
-col1, col2 = st.columns([2,8])
-with col1:
-    st.image('star_yc.png', width=150)
-with col2:
-    st.title('영천시 관광 챗봇')
-st.markdown('')
 
 def main() :
     load_dotenv()
 
     #st.set_page_config(page_title = 'Ask your PDF')
-    #st.header('영천시 관광 챗봇 -영광이-')
+    st.header('영천시 관광 가이드 챗봇 ')
 
     # upload file
     # pdf = st.file_uploader('Upload your PDF', type = 'pdf')
@@ -66,8 +60,9 @@ def main() :
         with col3:
             st.image('yc_chr.png', width = 120)
         with col4:
-            placeholder_text = '예시1: 영천시 관광 추천해줘.'
-            query = st.text_area("영천시 관광에 대해 물어보세요.:sunglasses: SEND 버튼 또는 Ctrl+Enter를 누르면 답변이 생성됩니다.", "", placeholder=placeholder_text)
+            with st.form('form', clear_on_submit=True):
+                query = st.text_input('영천시 관광에 대해 물어보세요.:sunglasses:','')
+                submitted = st.form_submit_button('전송')
         
         #user_question = st.text_input("영천시 관광에 대해 물어봐", key="user_question")
         
