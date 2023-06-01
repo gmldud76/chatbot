@@ -28,8 +28,9 @@ def main() :
     load_dotenv()
 
     #st.set_page_config(page_title = 'Ask your PDF')
-    st.header('      영천시 관광 가이드 챗봇 ')
-
+    #st.header('      영천시 관광 가이드 챗봇 ')
+    st.markdown("<h1 style='text-align: center; color: black;'>영천시 관광 챗봇</h1>", unsafe_allow_html=True)
+    
     # upload file
     # pdf = st.file_uploader('Upload your PDF', type = 'pdf')
     pdf= "YC_1.pdf"
