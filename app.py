@@ -137,9 +137,9 @@ def main() :
     with col1:
         st.image('yc_chr.png', width = 120)
 
-    col3, col4 = st.columns([1,8])
-    with col3:
-        st.image('yc_chr.png', width = 120)
+    #col3, col4 = st.columns([1,8])
+    #with col3:
+        #st.image('yc_chr.png', width = 120)
     # with col4:
     #     with st.form('form', clear_on_submit=True):
     #         user_question = st.text_input('영천시 관광에 대해 물어보세요.:sunglasses:','', key="user_question")
