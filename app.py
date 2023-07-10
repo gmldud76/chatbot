@@ -96,7 +96,7 @@ def main() :
     container = st.container()
 
     # 파일 업로드
-     pdf = "영천시데이터.pdf"
+    pdf = "영천시데이터.pdf"
     #pdf = "Yeoungchung.pdf"
     
 
