@@ -6,29 +6,15 @@ from dotenv import load_dotenv
 from PyPDF2 import PdfReader
 
 import streamlit as st
-import streamlit_chat as stc
 from streamlit_chat import message
 
-
 from langchain.text_splitter import CharacterTextSplitter
-
 from langchain.embeddings.openai import OpenAIEmbeddings
-
 from langchain.vectorstores import FAISS
-
 from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
-
 from langchain.llms import OpenAI
-from langchain.chat_models import ChatOpenAI
-
 from langchain.callbacks import get_openai_callback
-
-from langchain.schema import (
-    SystemMessage,
-    HumanMessage,
-    AIMessage
-)
 
 import re
 from translate import Translator
@@ -72,22 +58,29 @@ def add_bg_from_local(image_file):
 
 # 대화 내용 초기화
 def on_btn_click():
-    del st.session_state['generated']
-    del st.session_state['past']
-    del st.session_state['chat_history']
+    del st.session_state['generated'][:]
+    del st.session_state['past'][:]
+    del st.session_state['chat_history'][:]
 
 
 def main() :
     # env 로드  
     load_dotenv()
-    st.set_page_config(page_title = 'Ask your PDF')
+
+    # 홈페이지 이름
+    st.set_page_config(page_title = '영천시 관광 가이드 홈페이지')
     
     # 백그라운드 사진
-    # add_bg_from_local('background.jpg')  
+    # add_bg_from_local('배경.png')  
 
     # 헤드라인
-    st.markdown("<h1 style='text-align: center; color: black;'>영천시 관광 가이드 챗봇</h1>", unsafe_allow_html=True)
-
+    col1, col2 = st.columns([1,30])
+    with col1:
+        st.image('yc_chr.png', width = 120)
+    with col2:
+        st.markdown("<h1 style='text-align: center; color: black;'>영천시 관광 가이드 챗봇</h1>", unsafe_allow_html=True)
+        st.markdown('')
+    
     ## 대화내용 저장 공간
     if 'generated' not in st.session_state:
         st.session_state['generated'] = []
@@ -102,13 +95,9 @@ def main() :
 
     container = st.container()
 
-    # 사이드 바
-    # with st.sidebar :
-    #     st.button("New Chat", on_click=on_btn_click, type='primary')
-    #     st.write("사용법")
-
     # 파일 업로드
-    pdf = "영천시데이터.pdf"
+    # pdf = "영천시데이터.pdf"
+    pdf = "Yeoungchung.pdf"
     
 
     # 텍스트 추출
@@ -131,22 +120,9 @@ def main() :
         embeddings = OpenAIEmbeddings()
         knowledge_base = FAISS.from_texts(chunks, embeddings)
 
-        
-    # 대화창 생성
-    col1, col2 = st.columns([1,3])
-    with col1:
-        st.image('yc_chr.png', width = 120)
-
-    #col3, col4 = st.columns([1,8])
-    #with col3:
-        #st.image('yc_chr.png', width = 120)
-    # with col4:
-    #     with st.form('form', clear_on_submit=True):
-    #         user_question = st.text_input('영천시 관광에 대해 물어보세요.:sunglasses:','', key="user_question")
-    #         submit_button = st.form_submit_button('전송')
-
     
-
+   
+   # 질문창 및 답변 생성
     with container:
         with st.form(key='form', clear_on_submit=True):
             user_question = st.text_area('영천시 관광에 대해 물어보세요.:sunglasses:','', key="user_question", height=100)
@@ -174,8 +150,11 @@ def main() :
                     if has_english_word(response):
                          response = translate_text(response, target_language='ko')
 
-                    st.session_state['chat_history'].append({"role": "user", "content": response})
+                    st.session_state['chat_history'].append({"role": "Ai", "content": response})
                     print(cb)
+                    
+    
+
             
             st.session_state['past'].append(user_question)
             st.session_state['generated'].append(response)
@@ -183,32 +162,32 @@ def main() :
 
 
     # 대화 내용 출력
-    if st.session_state['chat_history'] : 
-        with response_container : 
-            con = st.container()    
-            for i in range(len(st.session_state['generated'])):
-                message(st.session_state["past"][i], is_user=True, key=str(i) + '_user')
-                message(st.session_state["generated"][i], key=str(i))
-                if i == 0 :
-                    con.caption('대화내용')
-            
-
-   
+    with response_container : 
+        con = st.container()    
+        for i in range(len(st.session_state['generated'])):
+            message(st.session_state["past"][i], is_user=True, key=str(i) + '_user')
+            message(st.session_state["generated"][i], key=str(i))
+            if i == 0 :
+                con.caption('대화내용')
+    
+    # 대화 내용 다운로드
     download_str = []
-    for msg in st.session_state['chat_history'][0:]:
-        download_str.append(msg['content'])
+    for i in range(len(st.session_state['generated'])):
+        download_str.append('질문: '+ st.session_state["past"][i])
+        download_str.append('답변: '+ st.session_state["generated"][i])
     download_str = '\n'.join(download_str)
     if download_str:
         st.sidebar.download_button('Download', download_str)
 
-  
+    # 사이드바 내용
     st.sidebar.button("New Chat", on_click=on_btn_click, type='primary')
-    st.sidebar.write("사용법")
+    st.sidebar.write("사용법\n\n질문을 입력하고 '전송'버튼을 누르시면 질문에 대한 답변이 나옵니다.\n\n새로운 대화를 하고 싶으시거나 질문에 대한 대답에 문제가 발생하시면 위에 있는 'New Chat'버튼을 눌러 다시 질문해주시면 감사하겠습니다.\n\n대화내용을 다운로드하고 싶으시면 질문 후 'New Chat' 위에 생성되는'Download'버튼을 클릭하시면 txt 파일로 다운로드 가능합니다.  ")
+
+
+
+
 
 
 if __name__ == '__main__' :
     main()
 
-# agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
-
-# agent.run("드라마 더 글로리 출연진이 누구야?")
