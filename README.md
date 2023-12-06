@@ -6,5 +6,6 @@ Streamlit chatgpt
 
 ## 기본플로우
 1. 각자 저장소 복제
-   
+   '''
    $ git clone https://github.com/gmldud76/chatbot.git
+   '''
